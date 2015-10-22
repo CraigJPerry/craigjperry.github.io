@@ -7,32 +7,32 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="There are 3 steps to configuring the hexo static site generator to use a custom domain while hosting on Github Pages:
 
-Setup the git repository
-Configure &amp;amp; deploy hexo
+Create A Git Repo
+Configure Hexo
 Configure DNS
 
-Create A Git">
+Lastly there’s some notes on how">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Hexo with Github Pages">
 <meta property="og:url" content="http://www.craigjperry.com/2015/10/15/Hexo-with-Github-Pages/index.html">
 <meta property="og:site_name" content="Craig J Perry">
 <meta property="og:description" content="There are 3 steps to configuring the hexo static site generator to use a custom domain while hosting on Github Pages:
 
-Setup the git repository
-Configure &amp;amp; deploy hexo
+Create A Git Repo
+Configure Hexo
 Configure DNS
 
-Create A Git">
-<meta property="og:updated_time" content="2015-10-15T23:11:23.547Z">
+Lastly there’s some notes on how">
+<meta property="og:updated_time" content="2015-10-22T00:56:46.023Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Hexo with Github Pages">
 <meta name="twitter:description" content="There are 3 steps to configuring the hexo static site generator to use a custom domain while hosting on Github Pages:
 
-Setup the git repository
-Configure &amp;amp; deploy hexo
+Create A Git Repo
+Configure Hexo
 Configure DNS
 
-Create A Git">
+Lastly there’s some notes on how">
   
   
     <link rel="icon" href="/favicon.png">
@@ -162,10 +162,11 @@ Create A Git">
       
         <p>There are 3 steps to configuring the <a href="https://hexo.io/" target="_blank" rel="external">hexo</a> static site generator to use a custom domain while hosting on <a href="https://pages.github.com/" target="_blank" rel="external">Github Pages</a>:</p>
 <ol>
-<li>Setup the git repository</li>
-<li>Configure &amp; deploy hexo</li>
+<li>Create A Git Repo</li>
+<li>Configure Hexo</li>
 <li>Configure DNS</li>
 </ol>
+<p>Lastly there’s some notes on how to use this setup.</p>
 <h2 id="Create_A_Git_Repo">Create A Git Repo</h2><p>Create an empty repo named <em>your-github-username.github.io</em> on the Github site.  Next, create a git repository to upload there:</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[user@host ~]$ git init github-username.github.io</span><br><span class="line">[user@host ~]$ <span class="built_in">cd</span> github-username.github.io</span><br><span class="line">[user@host github-username.github.io]$ touch .gitignore</span><br><span class="line">[user@host github-username.github.io]$ git add .gitignore</span><br><span class="line">[user@host github-username.github.io]$ git commit <span class="string">'Initial Commit'</span></span><br><span class="line">[user@host github-username.github.io]$ git remote add origin ssh://git@github.com:Your-Github-Username/your-github-username.github.io.git</span><br></pre></td></tr></table></figure>
 <p>There will be 2 branches in the repo:</p>
@@ -180,13 +181,19 @@ Create A Git">
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line">[user@host github-username.github.io]$ git remote add <span class="operator">-f</span> alex https://github.com/ppoffice/hexo-theme-alex.git</span><br><span class="line">[user@host github-username.github.io]$ git merge <span class="operator">-s</span> ours --no-commit alex/master</span><br><span class="line">[user@host github-username.github.io]$ git <span class="built_in">read</span>-tree --prefix=themes/alex -u alex/master</span><br><span class="line">[user@host github-username.github.io]$ cat - &gt;&gt; _config.yml &lt;&lt;EOF</span><br><span class="line">theme: alex</span><br><span class="line"></span><br><span class="line"><span class="comment"># Overridable Alex theme setting defaults from themes/alex/_config.yml</span></span><br><span class="line">theme_config:</span><br><span class="line"></span><br><span class="line">  <span class="comment"># Header</span></span><br><span class="line">  menu:</span><br><span class="line">    Home: /</span><br><span class="line">    Archives: /archives</span><br><span class="line">    About: /about/index.html</span><br><span class="line">  rss: </span><br><span class="line">  github: https://github.com/ppoffice/hexo-theme-alex</span><br><span class="line"></span><br><span class="line">  <span class="comment"># Content</span></span><br><span class="line">  excerpt_link: Read More</span><br><span class="line">  fancybox: <span class="literal">true</span></span><br><span class="line"></span><br><span class="line">  <span class="comment"># Sidebar</span></span><br><span class="line">  sidebar: left</span><br><span class="line">  widgets:</span><br><span class="line">  - category</span><br><span class="line">  - archive</span><br><span class="line">  - recent_posts</span><br><span class="line">  - tag</span><br><span class="line">  - tagcloud</span><br><span class="line">  - links</span><br><span class="line"></span><br><span class="line">  <span class="comment"># Links</span></span><br><span class="line">  links: </span><br><span class="line">    Hexo: http://hexo.io</span><br><span class="line"></span><br><span class="line">  <span class="comment"># Miscellaneous</span></span><br><span class="line">  google_analytics:</span><br><span class="line">  favicon: /favicon.png</span><br><span class="line">  twitter:</span><br><span class="line">  google_plus:</span><br><span class="line">  fb_admins:</span><br><span class="line">  fb_app_id:</span><br><span class="line">EOF</span><br><span class="line">[user@host github-username.github.io]$ git commit -m <span class="string">'Import alex theme'</span></span><br></pre></td></tr></table></figure>
 <p>Next i made the site deployable to github pages. I already have an SSH key trusted by github so i will deploy my git repo by SSH.</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">[user@host github-username.github.io]$ npm install hexo-deployer-git --save</span><br><span class="line">[user@host github-username.github.io]$ cat - &gt;&gt; _config.yml &lt;&lt;EOF</span><br><span class="line">deploy:</span><br><span class="line">  <span class="built_in">type</span>: git</span><br><span class="line">  repo: ssh://git@github.com/Your-Github-Username/your-github-username.github.io</span><br><span class="line">  branch: master</span><br><span class="line">EOF</span><br></pre></td></tr></table></figure>
-<h3 id="Deploying_Changes">Deploying Changes</h3><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[user@host github-username<span class="class">.github</span><span class="class">.io</span>]$ hexo generate</span><br><span class="line">[user@host github-username<span class="class">.github</span><span class="class">.io</span>]$ hexo deploy</span><br></pre></td></tr></table></figure>
-<p>Besides deploying the changed static site (which does a force push to the master branch), you should also commit the sources to git and push to the remote blog-setup branch.</p>
+<h2 id="Configure_DNS">Configure DNS</h2><p>Firstly, Github Pages requires that we publish a file called CNAME to the root of our repository (master branch). Since hexo performs a force push to that location, if we simply added the CNAME file it would be overwritten at deployment time. There is a simple plugin available to perform this for us though:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[user@host github-username.github.io]$ npm install hexo-generator-cname --save</span><br><span class="line">[user@host github-username.github.io]$ cat - &gt;&gt; _config.yml &lt;&lt;EOF</span><br><span class="line">plugins:</span><br><span class="line">- hexo-generator-cname</span><br><span class="line">EOF</span><br></pre></td></tr></table></figure>
+<p>Now when <code>hexo generate</code> is run, a CNAME file containing your domain name (configured from the url variable in _config.yml) will be created.</p>
+<p>Lastly, you need to login to your DNS provider and create a DNS CNAME record pointing hostname <em>www</em> to <em>your-github-username.github.io</em>. This can take a few hours to replicate. </p>
+<h2 id="Using_This_Setup">Using This Setup</h2><p>Now that the configuration is complete, we can actually publish some posts!</p>
+<h3 id="Leverging_Git:_A_Branching_Strategy">Leverging Git: A Branching Strategy</h3><p>We have 2 unrelated branches in our repo: master; blog-setup. We never directly edit anything in master, that’s updated for us when we run <code>hexo deploy</code>. The <em>blog-setup</em> branch contains the hexo site and i create branches off that for each of my posts:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">[user@host github-username.github.io]$ git branch</span><br><span class="line">* blog-setup</span><br><span class="line">  master</span><br><span class="line">[user@host github-username.github.io]$ git checkout -b my-next-post-topic</span><br><span class="line">[user@host github-username.github.io]$ hexo new post <span class="string">"My Next Post Topic"</span></span><br><span class="line">[user@host github-username.github.io]$ git add .</span><br><span class="line">[user@host github-username.github.io]$ git commit -m <span class="string">"Started topic"</span></span><br><span class="line">[user@host github-username.github.io]$ git push -u origin my-next-post-topic</span><br></pre></td></tr></table></figure>
+<p>When i’ve made my last commit and i’m ready to publish, i merge the branch back to blog-setup before running <code>hexo generate</code> and <code>hexo deploy</code>. The neat thing about pushing the branch upstream is that i can work on it over a few days from different machines, using Github as both an offsite backup and a synchronisation mechanism.</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://www.craigjperry.com/2015/10/15/Hexo-with-Github-Pages/" data-id="cifssi8g70000zklhp3j7zfdm" class="article-share-link">Share</a>
+      <a data-url="http://www.craigjperry.com/2015/10/15/Hexo-with-Github-Pages/" data-id="cig1ggy760000oclhfdxthgb9" class="article-share-link">Share</a>
       
       
     </footer>
