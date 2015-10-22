@@ -63,6 +63,10 @@ pagination_dir: page
 # Extensions
 ## Plugins: http://hexo.io/plugins/
 ## Themes: http://hexo.io/themes/
+
+plugins:
+- hexo-generator-cname
+
 theme: alex
 
 # Alex theme settings
