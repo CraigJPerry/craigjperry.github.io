@@ -4,9 +4,11 @@ tags:
 ---
 There are 3 steps to configuring the [hexo](https://hexo.io/) static site generator to use a custom domain while hosting on [Github Pages](https://pages.github.com/):
 
-1.  Setup the git repository
-2.  Configure & deploy hexo
+1.  Create A Git Repo
+2.  Configure Hexo
 3.  Configure DNS
+
+Lastly there's some notes on how to use this setup.
 
 ## Create A Git Repo
 
@@ -116,11 +118,39 @@ deploy:
 EOF
 {% endcodeblock %}
 
-### Deploying Changes
+## Configure DNS
 
-{% codeblock %}
-[user@host github-username.github.io]$ hexo generate
-[user@host github-username.github.io]$ hexo deploy
+Firstly, Github Pages requires that we publish a file called CNAME to the root of our repository (master branch). Since hexo performs a force push to that location, if we simply added the CNAME file it would be overwritten at deployment time. There is a simple plugin available to perform this for us though:
+
+{% codeblock lang:bash %}
+[user@host github-username.github.io]$ npm install hexo-generator-cname --save
+[user@host github-username.github.io]$ cat - >> _config.yml <<EOF
+plugins:
+- hexo-generator-cname
+EOF
 {% endcodeblock %}
 
-Besides deploying the changed static site (which does a force push to the master branch), you should also commit the sources to git and push to the remote blog-setup branch.
+Now when `hexo generate` is run, a CNAME file containing your domain name (configured from the url variable in _config.yml) will be created.
+
+Lastly, you need to login to your DNS provider and create a DNS CNAME record pointing hostname *www* to *your-github-username.github.io*. This can take a few hours to replicate. 
+
+## Using This Setup
+
+Now that the configuration is complete, we can actually publish some posts!
+
+### Leverging Git: A Branching Strategy
+
+We have 2 unrelated branches in our repo: master; blog-setup. We never directly edit anything in master, that's updated for us when we run `hexo deploy`. The *blog-setup* branch contains the hexo site and i create branches off that for each of my posts:
+
+{% codeblock lang:bash %}
+[user@host github-username.github.io]$ git branch
+* blog-setup
+  master
+[user@host github-username.github.io]$ git checkout -b my-next-post-topic
+[user@host github-username.github.io]$ hexo new post "My Next Post Topic"
+[user@host github-username.github.io]$ git add .
+[user@host github-username.github.io]$ git commit -m "Started topic"
+[user@host github-username.github.io]$ git push -u origin my-next-post-topic
+{% endcodeblock %}
+
+When i've made my last commit and i'm ready to publish, i merge the branch back to blog-setup before running `hexo generate` and `hexo deploy`. The neat thing about pushing the branch upstream is that i can work on it over a few days from different machines, using Github as both an offsite backup and a synchronisation mechanism.
