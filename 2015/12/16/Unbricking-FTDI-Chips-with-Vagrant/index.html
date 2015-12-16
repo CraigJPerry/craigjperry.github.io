@@ -3,17 +3,18 @@
 <head>
   <meta charset="utf-8">
   
-  <title>Archives: 2015 | Craig J Perry</title>
+  <title>Unbricking FTDI Chips with Vagrant | Craig J Perry</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Craig J Perry">
-<meta property="og:url" content="http://www.craigjperry.com/archives/2015/index.html">
+  <meta name="description" content="Some fake FTDI chips had their Product ID reset by old FTDI drivers from 0x6001 to 0x0000 which renderedthem unusable. It’s possible to reprogram the Product ID string and the modern FTDI drivers no l">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Unbricking FTDI Chips with Vagrant">
+<meta property="og:url" content="http://www.craigjperry.com/2015/12/16/Unbricking-FTDI-Chips-with-Vagrant/index.html">
 <meta property="og:site_name" content="Craig J Perry">
-<meta property="og:description">
+<meta property="og:description" content="Some fake FTDI chips had their Product ID reset by old FTDI drivers from 0x6001 to 0x0000 which renderedthem unusable. It’s possible to reprogram the Product ID string and the modern FTDI drivers no l">
+<meta property="og:updated_time" content="2015-12-16T20:57:59.377Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Craig J Perry">
-<meta name="twitter:description">
+<meta name="twitter:title" content="Unbricking FTDI Chips with Vagrant">
+<meta name="twitter:description" content="Some fake FTDI chips had their Product ID reset by old FTDI drivers from 0x6001 to 0x0000 which renderedthem unusable. It’s possible to reprogram the Product ID string and the modern FTDI drivers no l">
   
   
     <link rel="icon" href="/favicon.png">
@@ -127,77 +128,61 @@
   
 </aside>
         
-        <section id="main">
-  
-  
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2015" class="archive-year">2015</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2015/12/16/Unbricking-FTDI-Chips-with-Vagrant/" class="archive-article-date">
-  <time datetime="2015-12-16T20:45:44.000Z" itemprop="datePublished">Dec 16</time>
+        <section id="main"><article id="post-Unbricking-FTDI-Chips-with-Vagrant" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2015/12/16/Unbricking-FTDI-Chips-with-Vagrant/" class="article-date">
+  <time datetime="2015-12-16T20:45:44.000Z" itemprop="datePublished">2015-12-16</time>
 </a>
-      
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2015/12/16/Unbricking-FTDI-Chips-with-Vagrant/">Unbricking FTDI Chips with Vagrant</a>
+    <h1 class="article-title" itemprop="name">
+      Unbricking FTDI Chips with Vagrant
     </h1>
   
 
-    </header>
-  </div>
-</article>
-  
+      </header>
     
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2015/12/16/ESP8266-Arduino/" class="archive-article-date">
-  <time datetime="2015-12-16T19:18:31.000Z" itemprop="datePublished">Dec 16</time>
-</a>
+    <div class="article-entry" itemprop="articleBody">
       
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2015/12/16/ESP8266-Arduino/">ESP8266 Arduino</a>
-    </h1>
-  
+        <p>Some fake FTDI chips had their Product ID reset by old FTDI drivers from 0x6001 to 0x0000 which rendered<br>them unusable. It’s possible to reprogram the Product ID string and the modern FTDI drivers no longer<br>make this change. I used Vagrant to create a linux virtual machine for this:</p>
+<pre><code><span class="title">vagrant</span> init ubuntu/trusty64
+vagrant up
+</code></pre><p>I plugged the FTDI in to my host. I opened the virtualbox GUI and assigned this USB device to the<br>VM. The required USB drivers are not present in this image, so i added them:</p>
+<pre><code>sudo apt-<span class="keyword">get</span> install linux-image-extra-<span class="keyword">virtual</span>
+</code></pre><p>It’s possible at this point to tell udev to use the ftdi_sio module for devices reporting a product<br>ID of 0x0000 but that would only make the chip usable from this virtual machine.</p>
+<p>I downloaded Mark Lord’s ft232r_prog v1.25 from <a href="http://rtr.ca/ft232r/" target="_blank" rel="external">http://rtr.ca/ft232r/</a> and built it. I then used it<br>to update the configured product id:</p>
+<pre><code>sudo ./ft232r_prog –old-pid <span class="number">0x000</span> –<span class="keyword">new</span>-pid <span class="number">0x6001</span>
+</code></pre><p>After re-plugging the device in, it was usable as normal from my host machine.</p>
 
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2015/10/15/Hexo-with-Github-Pages/" class="archive-article-date">
-  <time datetime="2015-10-15T22:06:31.000Z" itemprop="datePublished">Oct 15</time>
-</a>
       
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2015/10/15/Hexo-with-Github-Pages/">Hexo with Github Pages</a>
-    </h1>
-  
-
-    </header>
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://www.craigjperry.com/2015/12/16/Unbricking-FTDI-Chips-with-Vagrant/" data-id="cii9avfr100012glhjay990p6" class="article-share-link">Share</a>
+      
+      
+    </footer>
   </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2015/12/16/ESP8266-Arduino/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">ESP8266 Arduino</div>
+    </a>
+  
+</nav>
+
+  
 </article>
-  
-  
-    </div></section>
-  
+
 </section>
       </div>
       <footer id="footer">
