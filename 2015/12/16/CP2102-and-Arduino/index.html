@@ -3,18 +3,30 @@
 <head>
   <meta charset="utf-8">
   
-  <title>Unbricking FTDI Chips with Vagrant | Craig J Perry</title>
+  <title>CP2102 and Arduino | Craig J Perry</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Some fake FTDI chips had their Product ID reset by old FTDI drivers from 0x6001 to 0x0000 which renderedthem unusable. It’s possible to reprogram the Product ID string and the modern FTDI drivers no l">
+  <meta name="description" content="There are 4 main USB to Serial chips sold on eBay:
+
+Genuine FTDI, rare and most expensive. Has the best drivers.
+Fake FTDI, common and cheap. Shares the best drivers.
+CP2102, common and cheap. Now has">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Unbricking FTDI Chips with Vagrant">
-<meta property="og:url" content="http://www.craigjperry.com/2015/12/16/Unbricking-FTDI-Chips-with-Vagrant/index.html">
+<meta property="og:title" content="CP2102 and Arduino">
+<meta property="og:url" content="http://www.craigjperry.com/2015/12/16/CP2102-and-Arduino/index.html">
 <meta property="og:site_name" content="Craig J Perry">
-<meta property="og:description" content="Some fake FTDI chips had their Product ID reset by old FTDI drivers from 0x6001 to 0x0000 which renderedthem unusable. It’s possible to reprogram the Product ID string and the modern FTDI drivers no l">
-<meta property="og:updated_time" content="2015-12-16T20:57:59.377Z">
+<meta property="og:description" content="There are 4 main USB to Serial chips sold on eBay:
+
+Genuine FTDI, rare and most expensive. Has the best drivers.
+Fake FTDI, common and cheap. Shares the best drivers.
+CP2102, common and cheap. Now has">
+<meta property="og:updated_time" content="2015-12-16T21:09:39.015Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Unbricking FTDI Chips with Vagrant">
-<meta name="twitter:description" content="Some fake FTDI chips had their Product ID reset by old FTDI drivers from 0x6001 to 0x0000 which renderedthem unusable. It’s possible to reprogram the Product ID string and the modern FTDI drivers no l">
+<meta name="twitter:title" content="CP2102 and Arduino">
+<meta name="twitter:description" content="There are 4 main USB to Serial chips sold on eBay:
+
+Genuine FTDI, rare and most expensive. Has the best drivers.
+Fake FTDI, common and cheap. Shares the best drivers.
+CP2102, common and cheap. Now has">
   
   
     <link rel="icon" href="/favicon.png">
@@ -132,10 +144,10 @@
   
 </aside>
         
-        <section id="main"><article id="post-Unbricking-FTDI-Chips-with-Vagrant" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-CP2102-and-Arduino" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2015/12/16/Unbricking-FTDI-Chips-with-Vagrant/" class="article-date">
-  <time datetime="2015-12-16T20:45:44.000Z" itemprop="datePublished">2015-12-16</time>
+    <a href="/2015/12/16/CP2102-and-Arduino/" class="article-date">
+  <time datetime="2015-12-16T21:01:22.000Z" itemprop="datePublished">2015-12-16</time>
 </a>
     
   </div>
@@ -146,7 +158,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      Unbricking FTDI Chips with Vagrant
+      CP2102 and Arduino
     </h1>
   
 
@@ -154,20 +166,27 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>Some fake FTDI chips had their Product ID reset by old FTDI drivers from 0x6001 to 0x0000 which rendered<br>them unusable. It’s possible to reprogram the Product ID string and the modern FTDI drivers no longer<br>make this change. I used Vagrant to create a linux virtual machine for this:</p>
-<pre><code><span class="title">vagrant</span> init ubuntu/trusty64
-vagrant up
-</code></pre><p>I plugged the FTDI in to my host. I opened the virtualbox GUI and assigned this USB device to the<br>VM. The required USB drivers are not present in this image, so i added them:</p>
-<pre><code>sudo apt-<span class="keyword">get</span> install linux-image-extra-<span class="keyword">virtual</span>
-</code></pre><p>It’s possible at this point to tell udev to use the ftdi_sio module for devices reporting a product<br>ID of 0x0000 but that would only make the chip usable from this virtual machine.</p>
-<p>I downloaded Mark Lord’s ft232r_prog v1.25 from <a href="http://rtr.ca/ft232r/" target="_blank" rel="external">http://rtr.ca/ft232r/</a> and built it. I then used it<br>to update the configured product id:</p>
-<pre><code>sudo ./ft232r_prog –old-pid <span class="number">0x000</span> –<span class="keyword">new</span>-pid <span class="number">0x6001</span>
-</code></pre><p>After re-plugging the device in, it was usable as normal from my host machine.</p>
+        <p>There are 4 main USB to Serial chips sold on eBay:</p>
+<ul>
+<li>Genuine FTDI, rare and most expensive. Has the best drivers.</li>
+<li>Fake FTDI, common and cheap. Shares the best drivers.</li>
+<li>CP2102, common and cheap. Now has good drivers on all platforms</li>
+<li>CH340G, ultra cheap and currently has terrible drivers although it’s still quite new so this may change</li>
+</ul>
+<p>To connect a CP2102 to an Arduino Pro Mini:</p>
+<pre><code>|<span class="string">  CP2102   </span>|<span class="string">  Arduino </span>|
+|<span class="string"> 5v / 3.3v </span>|<span class="string"> Vcc      </span>|
+|<span class="string"> Txd       </span>|<span class="string"> Txd      </span>|
+|<span class="string"> Rxd       </span>|<span class="string"> Rxd      </span>|
+|<span class="string"> GND       </span>|<span class="string"> GND      </span>|
+|<span class="string"> DTR       </span>|<span class="string"> DTR      </span>|
+</code></pre><p><strong>NB:</strong> the pinouts are confusing here, i’d expect Txd to connect to Rxd and vice versa. Similarly i’d<br>expect DTR to be labelled RTS. The above is correct on my version of the cp2102 but it did cause me<br>some consternation to find this!</p>
+<p>Different versions of the CP2102 breakout board are available. Some make for neater wiring connections<br>than others but all work just as well.</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://www.craigjperry.com/2015/12/16/Unbricking-FTDI-Chips-with-Vagrant/" data-id="cii9bafo10001uslhp127htqc" class="article-share-link">Share</a>
+      <a data-url="http://www.craigjperry.com/2015/12/16/CP2102-and-Arduino/" data-id="cii9bafn70000uslh2u3bek4n" class="article-share-link">Share</a>
       
       
     </footer>
@@ -176,19 +195,10 @@ vagrant up
     
 <nav id="article-nav">
   
-    <a href="/2015/12/16/CP2102-and-Arduino/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Newer</strong>
-      <div class="article-nav-title">
-        
-          CP2102 and Arduino
-        
-      </div>
-    </a>
   
-  
-    <a href="/2015/12/16/ESP8266-Arduino/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/2015/12/16/Unbricking-FTDI-Chips-with-Vagrant/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">ESP8266 Arduino</div>
+      <div class="article-nav-title">Unbricking FTDI Chips with Vagrant</div>
     </a>
   
 </nav>
