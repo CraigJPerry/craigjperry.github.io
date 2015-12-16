@@ -78,7 +78,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/10/">October 2015</a><span class="archive-list-count">1</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/12/">December 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/10/">October 2015</a><span class="archive-list-count">1</span></li></ul>
     </div>
   </div>
 
@@ -88,6 +88,10 @@
     <h3 class="widget-title">Recents</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2015/12/16/ESP8266-Arduino/">ESP8266 Arduino</a>
+          </li>
         
           <li>
             <a href="/2015/10/15/Hexo-with-Github-Pages/">Hexo with Github Pages</a>
@@ -120,6 +124,68 @@
 </aside>
         
         <section id="main">
+  
+    <article id="post-ESP8266-Arduino" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2015/12/16/ESP8266-Arduino/" class="article-date">
+  <time datetime="2015-12-16T19:18:31.000Z" itemprop="datePublished">2015-12-16</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/12/16/ESP8266-Arduino/">ESP8266 Arduino</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="The_Software">The Software</h2><p>The Arduino environment can be used to program ESP8266 WiFi boards. To configure the Arduino IDE v1.6.5<br>or newer, go to <em>File -&gt; Preferences</em> and add the following <em>Additional Boards Manager URL</em>:<br><a href="http://arduino.esp8266.com/stable/package_esp8266com_index.json" target="_blank" rel="external">http://arduino.esp8266.com/stable/package_esp8266com_index.json</a></p>
+<p>Then go to <em>Tools -&gt; Board -&gt; Boards Manager</em>. Install the latest esp8266 board manager.</p>
+<h3 id="Libraries">Libraries</h3><p>Available libraries include HTTP servers, mDNS / Bonjour &amp; SSDP service discovery alongside<br>any other Arduino libraries which don’t make use of native ATMEL hardware functions.</p>
+<p>An implicit <em>ESP</em> object provides access to platform native functionality not found in the other<br>Arduino environments. </p>
+<h2 id="The_Hardware">The Hardware</h2><p>The most common board is the ESP01. It’s a tiny 3.3v device with 2 rows of 4pin headers at one end and<br>a pcb antenna at the other. It’s capable of WiFi b/g/n in client or access point modes at up to 300m range.</p>
+<p>The processor runs at 80MHz and has a 512K SPI flash alongside it which runs at 40MHz. 64K of this flash<br>is used as a filesystem (SPIFFS).</p>
+<p>There are 4 GPIO pins, 2 of which double up as UART Tx/Rx. The UART defaults to 115200 baud rate. There’s<br>also a blue LED on the GPIO1 / UART TXD pin, it is active when the GPIO1 line is pulled low.</p>
+<h3 id="Pinouts">Pinouts</h3><p>With the board sitting so that the PCB antenna is facing upwards on the right hand side, the pins are:</p>
+<pre><code>|<span class="string"> GPIO1 / UART TXD / Blue LED </span>|<span class="string"> GND              </span>|
+|<span class="string"> Chip Enable (pullup to Vcc) </span>|<span class="string"> GPIO2            </span>|<span class="string"> 
+</span>|<span class="string"> RST                         </span>|<span class="string"> GPIO0            </span>|
+|<span class="string"> Vcc                         </span>|<span class="string"> GPIO3 / UART RXD </span>|
+</code></pre><p>If using GPIO1 and / or GPIO3, then the Serial port is unavailable. Likewise, if using the serial port<br>then only 2 GPIOs are available for use.</p>
+<p>The nature of the pinout means these boards are not particularly easy to use with a protoyping<br>breadboard. I went with this idea: <a href="http://tim.jagenberg.info/2014/11/08/diy-esp8266ex-breadboard-adapter/" target="_blank" rel="external">http://tim.jagenberg.info/2014/11/08/diy-esp8266ex-breadboard-adapter/</a></p>
+<h3 id="Programming_Connections">Programming Connections</h3><p>Whatever the pins are used for in your circuit, they are automatically overridden when the board is in<br>programming mode.</p>
+<p>Connections to a 3.3v USB Serial adapter are:</p>
+<pre><code>|<span class="string">   ESP8266   </span>|<span class="string">  Serial Adapter  </span>|
+|<span class="string"> GPIO1 / Tx  </span>|<span class="string"> Rx               </span>|
+|<span class="string"> GND         </span>|<span class="string"> GND              </span>|
+|<span class="string"> Chip Enable </span>|<span class="string"> 3.3v             </span>|
+|<span class="string"> GPIO2       </span>|<span class="string"> N/A              </span>|
+|<span class="string"> RST         </span>|<span class="string"> RTS              </span>|
+|<span class="string"> GPIO0       </span>|<span class="string"> N/A              </span>|
+|<span class="string"> Vcc         </span>|<span class="string"> 3.3v             </span>|
+|<span class="string"> GPIO3 / Rx  </span>|<span class="string"> Tx               </span>|
+</code></pre><h3 id="Other_Boards">Other Boards</h3><p>Other boards are available, almost all of them expose more pins than the ESP01. The most flexible<br>appears to be the NodeMCU v1.0 which for around £5 comes with an ESP-12E, a much larger 4MB SPI flash,<br>an onboard voltage regulator and an onboard CP2012 USB to serial adapter all in a breadboard-friendly<br>sized package.</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://www.craigjperry.com/2015/12/16/ESP8266-Arduino/" data-id="cii9abzgy0000fglhjbdp1bd7" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
   
     <article id="post-Hexo-with-Github-Pages" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
@@ -176,7 +242,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://www.craigjperry.com/2015/10/15/Hexo-with-Github-Pages/" data-id="cig1ggy760000oclhfdxthgb9" class="article-share-link">Share</a>
+      <a data-url="http://www.craigjperry.com/2015/10/15/Hexo-with-Github-Pages/" data-id="cii9abzhw0001fglh1t9lw50j" class="article-share-link">Share</a>
       
       
     </footer>
