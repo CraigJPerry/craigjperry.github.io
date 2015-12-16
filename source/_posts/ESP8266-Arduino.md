@@ -57,7 +57,7 @@ Connections to a 3.3v USB Serial adapter are:
     | Chip Enable | 3.3v             |
     | GPIO2       | N/A              |
     | RST         | RTS              |
-    | GPIO0       | N/A              |
+    | GPIO0       | DTR              |
     | Vcc         | 3.3v             |
     | GPIO3 / Rx  | Tx               |
 
