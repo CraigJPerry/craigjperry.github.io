@@ -78,7 +78,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/12/">December 2015</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/10/">October 2015</a><span class="archive-list-count">1</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/12/">December 2015</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/10/">October 2015</a><span class="archive-list-count">1</span></li></ul>
     </div>
   </div>
 
@@ -88,6 +88,10 @@
     <h3 class="widget-title">Recents</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2015/12/17/HC06-Bluetooth-Module/">HC06 Bluetooth Module</a>
+          </li>
         
           <li>
             <a href="/2015/12/16/CP2102-and-Arduino/">CP2102 and Arduino</a>
@@ -133,6 +137,60 @@
         
         <section id="main">
   
+    <article id="post-HC06-Bluetooth-Module" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2015/12/17/HC06-Bluetooth-Module/" class="article-date">
+  <time datetime="2015-12-17T01:51:34.000Z" itemprop="datePublished">2015-12-17</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/12/17/HC06-Bluetooth-Module/">HC06 Bluetooth Module</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>The HC06 is the same hardware as HC05 but has fewer features. JY-MCU is written on the rear of HC06<br>modules.</p>
+<h2 id="Connecting_To_The_Serial_Port">Connecting To The Serial Port</h2><p>These devices are 3.3v only. The wiring is straightforward:</p>
+<pre><code>|<span class="string">  Serial Adapter  </span>|<span class="string">  HC06  </span>|
+|<span class="string"> 3.3v             </span>|<span class="string"> Vcc    </span>|
+|<span class="string"> Gnd              </span>|<span class="string"> Gnd    </span>|
+|<span class="string"> Tx               </span>|<span class="string"> Rxd    </span>|
+|<span class="string"> Rx               </span>|<span class="string"> Txd    </span>|
+</code></pre><p>The state pin emits the same pattern as the red led and can be used to detect current status. The<br>key pin is unused.</p>
+<h2 id="Entering_Commands">Entering Commands</h2><p>HC06 monitors input for 1 second then acts upon what’s been received. Newlines should not be used<br>at the end of commands, as would normally be the case for AT commands.</p>
+<p>The available command set is small. The useful subset is easy to remember:</p>
+<pre><code>|<span class="string"> Command    </span>|<span class="string"> Response   </span>|<span class="string"> Notes                           </span>|
+|<span class="string"> AT         </span>|<span class="string"> OK         </span>|<span class="string"> Status check                    </span>|
+|<span class="string"> AT+NAMEFoo </span>|<span class="string"> setname    </span>|<span class="string"> The bluetooth name is now "Foo" </span>|
+|<span class="string"> AT+PIN1234 </span>|<span class="string"> setpin     </span>|<span class="string"> The bluetooth PIN is now 1234   </span>|
+|<span class="string"> AT+BAUD4   </span>|<span class="string"> OK         </span>|<span class="string"> The default baud rate, 9600     </span>|
+|<span class="string"> AT+BAUD8   </span>|<span class="string"> OK         </span>|<span class="string"> 115200 baud rate                </span>|
+</code></pre><p>There are no terminating newlines in these commands. The HC06 simply waits for up to 1 second<br>and executes at command entered until that point. This means you’ll have to copy / paste commands<br>for them to be fully entered quickly enough.</p>
+<h2 id="Using_The_Bluetooth_Serial_Bridge">Using The Bluetooth Serial Bridge</h2><p>Connect to the bluetooth device, connect to the bluetooth com port, now any text entered is<br>sent to the serial connection and vice versa.</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://www.craigjperry.com/2015/12/17/HC06-Bluetooth-Module/" data-id="cii9lrl1w0003uolhwui13rbq" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-CP2102-and-Arduino" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2015/12/16/CP2102-and-Arduino/" class="article-date">
@@ -175,7 +233,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://www.craigjperry.com/2015/12/16/CP2102-and-Arduino/" data-id="cii9gloxr0000l0lhd2radqpf" class="article-share-link">Share</a>
+      <a data-url="http://www.craigjperry.com/2015/12/16/CP2102-and-Arduino/" data-id="cii9lrl0o0000uolhu5r22efc" class="article-share-link">Share</a>
       
       
     </footer>
@@ -220,7 +278,7 @@ vagrant up
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://www.craigjperry.com/2015/12/16/Unbricking-FTDI-Chips-with-Vagrant/" data-id="cii9gloyr0001l0lhefnlbs5o" class="article-share-link">Share</a>
+      <a data-url="http://www.craigjperry.com/2015/12/16/Unbricking-FTDI-Chips-with-Vagrant/" data-id="cii9lrl1q0001uolhhjhoaoaa" class="article-share-link">Share</a>
       
       
     </footer>
@@ -282,7 +340,7 @@ vagrant up
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://www.craigjperry.com/2015/12/16/ESP8266-Arduino/" data-id="cii9gloz10003l0lhxibc3wz2" class="article-share-link">Share</a>
+      <a data-url="http://www.craigjperry.com/2015/12/16/ESP8266-Arduino/" data-id="cii9lrl1z0004uolhvazmm1vc" class="article-share-link">Share</a>
       
       
     </footer>
@@ -347,7 +405,7 @@ vagrant up
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://www.craigjperry.com/2015/10/15/Hexo-with-Github-Pages/" data-id="cii9gloyv0002l0lhspni4jxx" class="article-share-link">Share</a>
+      <a data-url="http://www.craigjperry.com/2015/10/15/Hexo-with-Github-Pages/" data-id="cii9lrl1t0002uolh6r0zzc9w" class="article-share-link">Share</a>
       
       
     </footer>

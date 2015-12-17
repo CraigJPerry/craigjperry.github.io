@@ -3,17 +3,24 @@
 <head>
   <meta charset="utf-8">
   
-  <title>Archives: 2015/12 | Craig J Perry</title>
+  <title>HC06 Bluetooth Module | Craig J Perry</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Craig J Perry">
-<meta property="og:url" content="http://www.craigjperry.com/archives/2015/12/index.html">
+  <meta name="description" content="The HC06 is the same hardware as HC05 but has fewer features. JY-MCU is written on the rear of HC06modules.
+Connecting To The Serial PortThese devices are 3.3v only. The wiring is straightforward:
+|">
+<meta property="og:type" content="article">
+<meta property="og:title" content="HC06 Bluetooth Module">
+<meta property="og:url" content="http://www.craigjperry.com/2015/12/17/HC06-Bluetooth-Module/index.html">
 <meta property="og:site_name" content="Craig J Perry">
-<meta property="og:description">
+<meta property="og:description" content="The HC06 is the same hardware as HC05 but has fewer features. JY-MCU is written on the rear of HC06modules.
+Connecting To The Serial PortThese devices are 3.3v only. The wiring is straightforward:
+|">
+<meta property="og:updated_time" content="2015-12-17T02:02:51.051Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Craig J Perry">
-<meta name="twitter:description">
+<meta name="twitter:title" content="HC06 Bluetooth Module">
+<meta name="twitter:description" content="The HC06 is the same hardware as HC05 but has fewer features. JY-MCU is written on the rear of HC06modules.
+Connecting To The Serial PortThese devices are 3.3v only. The wiring is straightforward:
+|">
   
   
     <link rel="icon" href="/favicon.png">
@@ -135,96 +142,70 @@
   
 </aside>
         
-        <section id="main">
-  
-  
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2015" class="archive-year">2015</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2015/12/17/HC06-Bluetooth-Module/" class="archive-article-date">
-  <time datetime="2015-12-17T01:51:34.000Z" itemprop="datePublished">Dec 17</time>
+        <section id="main"><article id="post-HC06-Bluetooth-Module" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2015/12/17/HC06-Bluetooth-Module/" class="article-date">
+  <time datetime="2015-12-17T01:51:34.000Z" itemprop="datePublished">2015-12-17</time>
 </a>
-      
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2015/12/17/HC06-Bluetooth-Module/">HC06 Bluetooth Module</a>
+    <h1 class="article-title" itemprop="name">
+      HC06 Bluetooth Module
     </h1>
   
 
-    </header>
-  </div>
-</article>
-  
+      </header>
     
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2015/12/16/CP2102-and-Arduino/" class="archive-article-date">
-  <time datetime="2015-12-16T21:01:22.000Z" itemprop="datePublished">Dec 16</time>
-</a>
+    <div class="article-entry" itemprop="articleBody">
       
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2015/12/16/CP2102-and-Arduino/">CP2102 and Arduino</a>
-    </h1>
-  
+        <p>The HC06 is the same hardware as HC05 but has fewer features. JY-MCU is written on the rear of HC06<br>modules.</p>
+<h2 id="Connecting_To_The_Serial_Port">Connecting To The Serial Port</h2><p>These devices are 3.3v only. The wiring is straightforward:</p>
+<pre><code>|<span class="string">  Serial Adapter  </span>|<span class="string">  HC06  </span>|
+|<span class="string"> 3.3v             </span>|<span class="string"> Vcc    </span>|
+|<span class="string"> Gnd              </span>|<span class="string"> Gnd    </span>|
+|<span class="string"> Tx               </span>|<span class="string"> Rxd    </span>|
+|<span class="string"> Rx               </span>|<span class="string"> Txd    </span>|
+</code></pre><p>The state pin emits the same pattern as the red led and can be used to detect current status. The<br>key pin is unused.</p>
+<h2 id="Entering_Commands">Entering Commands</h2><p>HC06 monitors input for 1 second then acts upon what’s been received. Newlines should not be used<br>at the end of commands, as would normally be the case for AT commands.</p>
+<p>The available command set is small. The useful subset is easy to remember:</p>
+<pre><code>|<span class="string"> Command    </span>|<span class="string"> Response   </span>|<span class="string"> Notes                           </span>|
+|<span class="string"> AT         </span>|<span class="string"> OK         </span>|<span class="string"> Status check                    </span>|
+|<span class="string"> AT+NAMEFoo </span>|<span class="string"> setname    </span>|<span class="string"> The bluetooth name is now "Foo" </span>|
+|<span class="string"> AT+PIN1234 </span>|<span class="string"> setpin     </span>|<span class="string"> The bluetooth PIN is now 1234   </span>|
+|<span class="string"> AT+BAUD4   </span>|<span class="string"> OK         </span>|<span class="string"> The default baud rate, 9600     </span>|
+|<span class="string"> AT+BAUD8   </span>|<span class="string"> OK         </span>|<span class="string"> 115200 baud rate                </span>|
+</code></pre><p>There are no terminating newlines in these commands. The HC06 simply waits for up to 1 second<br>and executes at command entered until that point. This means you’ll have to copy / paste commands<br>for them to be fully entered quickly enough.</p>
+<h2 id="Using_The_Bluetooth_Serial_Bridge">Using The Bluetooth Serial Bridge</h2><p>Connect to the bluetooth device, connect to the bluetooth com port, now any text entered is<br>sent to the serial connection and vice versa.</p>
 
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2015/12/16/Unbricking-FTDI-Chips-with-Vagrant/" class="archive-article-date">
-  <time datetime="2015-12-16T20:45:44.000Z" itemprop="datePublished">Dec 16</time>
-</a>
       
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2015/12/16/Unbricking-FTDI-Chips-with-Vagrant/">Unbricking FTDI Chips with Vagrant</a>
-    </h1>
-  
-
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2015/12/16/ESP8266-Arduino/" class="archive-article-date">
-  <time datetime="2015-12-16T19:18:31.000Z" itemprop="datePublished">Dec 16</time>
-</a>
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://www.craigjperry.com/2015/12/17/HC06-Bluetooth-Module/" data-id="cii9lrl1w0003uolhwui13rbq" class="article-share-link">Share</a>
       
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2015/12/16/ESP8266-Arduino/">ESP8266 Arduino</a>
-    </h1>
-  
-
-    </header>
+      
+    </footer>
   </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2015/12/16/CP2102-and-Arduino/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">CP2102 and Arduino</div>
+    </a>
+  
+</nav>
+
+  
 </article>
-  
-  
-    </div></section>
-  
+
 </section>
       </div>
       <footer id="footer">
