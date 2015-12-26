@@ -78,7 +78,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/12/">December 2015</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/10/">October 2015</a><span class="archive-list-count">1</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/12/">December 2015</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/10/">October 2015</a><span class="archive-list-count">1</span></li></ul>
     </div>
   </div>
 
@@ -88,6 +88,10 @@
     <h3 class="widget-title">Recents</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2015/12/26/NASA-3D-Printed-Wrench/">NASA 3D Printed Wrench</a>
+          </li>
         
           <li>
             <a href="/2015/12/26/Quadrifilar-Helix-Antenna/">Quadrifilar Helix Antenna</a>
@@ -103,10 +107,6 @@
         
           <li>
             <a href="/2015/12/16/CP2102-and-Arduino/">CP2102 and Arduino</a>
-          </li>
-        
-          <li>
-            <a href="/2015/12/16/Unbricking-FTDI-Chips-with-Vagrant/">Unbricking FTDI Chips with Vagrant</a>
           </li>
         
       </ul>
@@ -136,6 +136,59 @@
 </aside>
         
         <section id="main">
+  
+    <article id="post-NASA-3D-Printed-Wrench" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2015/12/26/NASA-3D-Printed-Wrench/" class="article-date">
+  <time datetime="2015-12-26T11:26:02.000Z" itemprop="datePublished">2015-12-26</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/12/26/NASA-3D-Printed-Wrench/">NASA 3D Printed Wrench</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>To test out my new Lulzbot Mini i printed the<br><a href="http://nasa3d.arc.nasa.gov/detail/wrench-mis" target="_blank" rel="external">Nasa 3D wrench</a>.</p>
+<img src="/2015/12/26/NASA-3D-Printed-Wrench/wrench1.jpg" alt="wrench1.jpg" title="">
+<p>It ratchets in the clockwise direction only but it prints as<br>a fully functioning part. It’s stronger than the rated 3in-lbs.</p>
+<img src="/2015/12/26/NASA-3D-Printed-Wrench/wrench2.jpg" alt="wrench2.jpg" title="">
+<p>It wasn’t all plain sailing though, this being my first ever<br>3D print, it was a good learning curve.</p>
+<img src="/2015/12/26/NASA-3D-Printed-Wrench/wrench3.jpg" alt="wrench3.jpg" title="">
+<p>I didn’t fully print all of these, i could tell early on if it<br>was going to work or not.</p>
+<pre><code>|<span class="string"> Material </span>|<span class="string"> Fillament Dia </span>|<span class="string"> Layer Height </span>|<span class="string"> Flow </span>|<span class="string"> Infill </span>|<span class="string"> Result                </span>|
+|<span class="string"> ABS      </span>|<span class="string"> 2.85mm        </span>|<span class="string"> 1.8mm        </span>|<span class="string"> 100% </span>|<span class="string"> 20%    </span>|<span class="string"> Fused solid           </span>|
+|<span class="string"> ABS      </span>|<span class="string"> 2.85mm        </span>|<span class="string"> Std Print    </span>|<span class="string"> 100% </span>|<span class="string"> 20%    </span>|<span class="string"> Fused solid           </span>|
+|<span class="string"> ABS      </span>|<span class="string"> 3mm           </span>|<span class="string"> 2mm          </span>|<span class="string"> 90%  </span>|<span class="string"> 25%    </span>|<span class="string"> Works, slightly loose </span>|
+|<span class="string"> ABS      </span>|<span class="string"> 3mm           </span>|<span class="string"> 1.8mm        </span>|<span class="string"> 100  </span>|<span class="string"> 25%    </span>|<span class="string"> Fused solid           </span>|
+|<span class="string"> ABS      </span>|<span class="string"> 3mm           </span>|<span class="string"> 1.8mm        </span>|<span class="string"> 95%  </span>|<span class="string"> 25%    </span>|<span class="string"> ?                     </span>|
+</code></pre><p>I was having a tough time getting these off the print bed. First<br>layer adhesion was too good. So i reduced initial layer line width<br>to 115% which struck a nicer balance of security vs. easier removal.</p>
+<p>So it seems my Lulzbot mini over prints very slightly. Upping the<br>fillament diameter helped but did not fully resolve. I measured the<br>fillament at between 2.80mm and almost 3mm in some sections.</p>
+<p>I measured the infeed and found a 10mm command produced a 9.95mm<br>feed.</p>
+<p>With 20% infill i can’t break the handle with hands alone. The<br>square peg fails easily by splitting a layer. Tolerance of square<br>peg is tight, even with set to under extrude.</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://www.craigjperry.com/2015/12/26/NASA-3D-Printed-Wrench/" data-id="ciin183pv0004islh0xhlznt6" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
   
     <article id="post-Quadrifilar-Helix-Antenna" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
@@ -170,7 +223,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://www.craigjperry.com/2015/12/26/Quadrifilar-Helix-Antenna/" data-id="ciimf5lp5000300lh2f1azl5n" class="article-share-link">Share</a>
+      <a data-url="http://www.craigjperry.com/2015/12/26/Quadrifilar-Helix-Antenna/" data-id="ciin183pd0003islhz7t1soua" class="article-share-link">Share</a>
       
       
     </footer>
@@ -220,7 +273,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://www.craigjperry.com/2015/12/25/Quanum-Googles-v1/" data-id="ciimf5lom000200lh0lohql3p" class="article-share-link">Share</a>
+      <a data-url="http://www.craigjperry.com/2015/12/25/Quanum-Googles-v1/" data-id="ciin183ow0002islhwsazep3r" class="article-share-link">Share</a>
       
       
     </footer>
@@ -274,7 +327,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://www.craigjperry.com/2015/12/17/HC06-Bluetooth-Module/" data-id="ciimf5lpq000500lhut1dtm5v" class="article-share-link">Share</a>
+      <a data-url="http://www.craigjperry.com/2015/12/17/HC06-Bluetooth-Module/" data-id="ciin183qd0006islh6wnb9vre" class="article-share-link">Share</a>
       
       
     </footer>
@@ -326,7 +379,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://www.craigjperry.com/2015/12/16/CP2102-and-Arduino/" data-id="ciimf5lo8000000lhsiywbjyf" class="article-share-link">Share</a>
+      <a data-url="http://www.craigjperry.com/2015/12/16/CP2102-and-Arduino/" data-id="ciin183oh0000islhcei8ovip" class="article-share-link">Share</a>
       
       
     </footer>
@@ -371,7 +424,7 @@ vagrant up
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://www.craigjperry.com/2015/12/16/Unbricking-FTDI-Chips-with-Vagrant/" data-id="ciimf5loh000100lh09esrnu1" class="article-share-link">Share</a>
+      <a data-url="http://www.craigjperry.com/2015/12/16/Unbricking-FTDI-Chips-with-Vagrant/" data-id="ciin183oq0001islhg2auemku" class="article-share-link">Share</a>
       
       
     </footer>
@@ -433,7 +486,7 @@ vagrant up
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://www.craigjperry.com/2015/12/16/ESP8266-Arduino/" data-id="ciimf5lpv000600lhk91ongey" class="article-share-link">Share</a>
+      <a data-url="http://www.craigjperry.com/2015/12/16/ESP8266-Arduino/" data-id="ciin183qh0007islhe06v5nll" class="article-share-link">Share</a>
       
       
     </footer>
@@ -498,7 +551,7 @@ vagrant up
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://www.craigjperry.com/2015/10/15/Hexo-with-Github-Pages/" data-id="ciimf5lpm000400lhemny5rv0" class="article-share-link">Share</a>
+      <a data-url="http://www.craigjperry.com/2015/10/15/Hexo-with-Github-Pages/" data-id="ciin183qb0005islh9dodvlg5" class="article-share-link">Share</a>
       
       
     </footer>
